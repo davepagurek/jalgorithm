@@ -187,7 +187,7 @@ for t in range(100):
     hole_a = torch.flatten(hole_img)[3::4]
     hard_a = torch.flatten(hard_img)[3::4]
     hard2_a = torch.flatten(hard_img2)[3::4]
-    hard_all_a = torch.maximum(hard_a + hard2_a, torch.ones_like(hard_a))
+    hard_all_a = torch.minimum(hard_a + hard2_a, torch.ones_like(hard_a))
 
     hole_cost = 1000 * -(hole_a * img_a).pow(2).sum() / (hole_a.pow(2).sum() + 1)
     hard_cost = 1000 * ((hard_a + hard2_a) * img_a).pow(2).sum() / ((hard_a + hard2_a).pow(2).sum() + 1)
